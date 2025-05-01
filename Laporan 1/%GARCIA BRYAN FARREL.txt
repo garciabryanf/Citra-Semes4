@@ -1,0 +1,302 @@
+%GARCIA BRYAN FARREL
+2+3;
+ans
+
+2 * 3 + 4*5 + 6*7;
+ans
+
+%GARCIA BRYAN FARREL
+fruit_per_box = 20; num_of_boxes = 5; 
+total_num_of_fruit = fruit_per_box * num_of_boxes;
+
+disp(['Total buah: ', num2str(total_num_of_fruit)]);
+
+
+%GARCIA BRYAN FARREL
+Jumlah = 5+5;
+jumlah
+
+%GARCIA BRYAN FARREL
+pi; eps; inf; i;
+
+disp(['Nilai pi: ', num2str(pi)]);
+disp(['Nilai eps: ', num2str(eps)]);
+disp(['Nilai inf: ', num2str(inf)]);
+disp(['Nilai i: ', num2str(i)]);
+
+%GARCIA BRYAN FARREL
+A = [1 2 3 ; 4 5 6; 7 8 9]
+A;
+
+%GARCIA BRYAN FARREL
+A = [1 2 3 ; 4 5 6]
+A;
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+A = 1:1:5;
+B = 5:-1:1;
+C = 1:2:9;
+D = 9:-2;1;
+
+A, B  ,C, D
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+A = 0 
+pi/4
+pi
+
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+A = [1 2 3; 4 5 6; 7 8 9]
+A(:, 1)
+A(1, :)
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+A(: , 1) = [1 4 7]
+
+B(1 , :) = [1 2 3]
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+linspace(pi/4,pi,4)
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+pi/4
+pi/2
+3*pi/4
+pi
+	
+%GARCIA BRYAN FARREL
+%2327250026
+
+zeros (3,4) 
+ones (3,4) 
+ones (3,4) * 10 
+rand (3,4) 
+randn (3,4)
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+rand(4, 4)
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+randn(4, 4)
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+X = [1 2 3]; Y = [4 5 6]; Z = [7 8 9];
+A = [X;Y;Z]
+B = cat(1,X,Y,Z)
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+A = ones (4,3,2); 
+B = rand (5,2,3); 
+size(A)
+size(B)
+disp(A)
+disp(B)
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+A = [4 3 6; 1 6 6; 4 2 0];
+B = [9 8; 7 6];
+size(A)
+size(B)
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+x = [1 2 -2; 0 -3 4; 7 3 0]
+y = [1 0 -1; 2 3 -5; 1 3 5]
+
+x * y
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+x = [1 2 -2; 0 -3 4; 7 3 0]
+y = [1 0 -1; 2 3 -5; 1 3 5]
+
+x .* y
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+x = eye(3,4)
+y = rand(4,2)
+x*y
+%y*x(error)
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+Y = rand (3,3)*4 
+Y_diag = diag (Y) 
+Y_trace = trace (Y)
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+C = [3, 5, 7; 1, 4, 2; 6, 8, 9];
+
+hasil_trace = trace(C);
+disp('Hasil trace dengan fungsi trace:');
+disp(hasil_trace);
+
+hasil_alternatif = sum(diag(C));
+disp('Hasil trace dengan cara alternatif:');
+disp(hasil_alternatif);
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+Y = [1 2 3; 4 5 6];
+Y
+Y_t = Y'
+
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+Y = [1 2 3; 4 5 6];
+
+Y_inv = inv(Y) 
+Y * Y_inv
+Y_inv * Y
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+Y = [4 2; 3 1];
+Y_det = det(Y);
+disp('Determinan dari Y adalah:');
+disp(Y_det);
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+X{1} = [1 2 3; 4 5 6; 7 8 9];   
+X{2} = 2 + 3i;                 
+X{3} = 'String';               
+X{4} = 1:2:9;                 
+
+X                         
+celldisp(X)                    
+
+X(1)                            
+X{1}              
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+X(1) = {[1 2 3; 4 5 6; 7 8 9]};
+X = {}
+
+X(1) = {[1 2 3; 4 5 6; 7 8 9]};  
+disp(X)
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+X(3) = 'This produces an error'
+
+X(3) = {'This is Okay'}
+
+X{3} = 'This is Okay too'
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+images(1).imagename = 'Image 1';
+images(1).width = 256;
+images(1).height = 256;
+
+images(2).imagename = 'Image 2';
+images(2).width = 128;
+images(2).height = 128;
+
+%GARCIA BRYAN FARREL
+%2327250026
+              
+my_images(1).imagename = 'Image 1';
+my_images(1).width = 256;
+my_images(1).height = 256;
+
+my_images(2).imagename = 'Image 2';
+my_images(2).width = 128;
+my_images(2).height = 128;
+
+my_images(1)               
+my_images(2).imagename      
+
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+my_images(1).imagename = 'Image 1';
+my_images(1).width = 256;
+my_images(1).height = 256;
+
+my_images(2).imagename = 'Image 2';
+my_images(2).width = 128;
+my_images(2).height = 128;
+
+num_of_images = prod(size(my_images))
+fieldnames(my_images)
+class(my_images)
+isstruct(my_images)
+isstruct(num_of_images)
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+my_images(1).imagename = 'Image 1';
+my_images(1).width = 256;
+my_images(1).height = 256;
+
+isstruct(my_images)
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+my_images(1).imagename = 'Image 1';
+my_images(1).width = 256;
+my_images(1).height = 256;
+
+num_of_images = prod(size(my_images))
+isstruct(num_of_images)
+
+
+%GARCIA BRYAN FARREL
+%2327250026
+
+s.name = 'Bryan';
+s.age = 19;
+s.kota = 'Palembang'
+
+s = rmfield(s, 'age');
+
+
+
+
+
+
+
