@@ -1,0 +1,105 @@
+%Garcia Bryan Farrel
+%2327250026
+
+I = imread('circuit.tif'); 
+figure, subplot(2,2,1), imshow(I), title('Image')
+subplot(2,2,2), imhist (I,256), axis tight, title('Histogram')
+subplot(2,2,3), imhist (I, 64), axis tight, ...
+title('Histogram with 64 bins')
+subplot(2,2,4), imhist(I,32), axis tight, ...
+title('Histogram with 32 bins')
+
+%Garcia Bryan Farrel
+%2327250026
+
+c = imhist(I, 32)
+c_norm = c / numel(I);
+disp(sum(c_norm) == 1);
+
+%Garcia Bryan Farrel
+%2327250026
+
+figure, 
+subplot(1,2,1), bar_1 = bar(c); 
+set (gca, 'XLim', [0 32], 'YLim', [0 max(c)]);
+
+set (gca, 'XTick', [0:8:32], 'YTick', ...
+    [linspace(0,7000,8) max(c)]); 
+subplot(1,2,2), bar_1 = bar(c);
+
+set (bar_1, 'FaceColor', 'r'), title('Bar Chart')
+
+%Garcia Bryan Farrel
+%2327250026
+
+figure, 
+subplot(1,2,1), bar_1 = bar(c, 'BarWidth', 0.2);%Lebar batang 0.2
+set(gca, 'XLim', [0 32], 'YLim', [0 max(c)]);
+set(gca, 'XTick', 0:8:32, 'YTick', [linspace(0, 7000, 8) max(c)]); 
+
+subplot(1,2,2), bar_1 = bar(c, 'BarWidth', 0.8);%Lebar batang 0.8
+set(bar_1, 'FaceColor', 'r'), title('Bar Chart');
+
+%Garcia Bryan Farrel
+%2327250026
+
+set (gca, 'XTick', 0:8:32, 'YTick', ... 
+    [linspace(0, 0.09,10) max(c_norm)]) 
+xlim([0 32]), ylim([0 max(c_norm)]) 
+title('Normalized Bar Chart') 
+
+figure;
+
+subplot(1,2,1);
+stem(c, 'fill', 'MarkerFaceColor', 'red', 'LineStyle', ':');
+xlim([0 32]); 
+ylim([0 max(c) + 500]); 
+set(gca, 'XTick', 0:8:32, 'YTick', linspace(0, max(c), 8));
+title('Meningkatkan Stem Chart');
+
+subplot(1,2,2);
+stem(c_norm, 'fill', 'MarkerFaceColor', 'red', 'LineStyle', ':');
+xlim([0 32]);  
+ylim([0 max(c_norm) + 0.01]); 
+set(gca, 'XTick', 0:8:32, 'YTick', linspace(0, max(c_norm), 8));
+title('Meningkatkan normalisasi pada Stem Chart');
+
+
+%Garcia Bryan Farrel
+%2327250026
+
+set (gca, 'XTick', 0:8:32, 'YTick', ... 
+    [linspace(0, 0.09,10) max(c_norm)]) 
+xlim([0 32]), ylim([0 max(c_norm)]) 
+
+figure, 
+subplot(1,2,1), plot (c), axis auto, title('Plot Graph') 
+subplot(1,2,2), plot (c_norm), axis auto, title('Normalized Plot Graph') 
+
+
+%Garcia Bryan Farrel
+%2327250026
+
+set (gca, 'XTick', 0:8:32, 'YTick', ... 
+    [linspace(0, 0.09,10) max(c_norm)]) 
+xlim([0 32]), ylim([0 max(c_norm)]) 
+
+figure;
+subplot(1,2,1);
+plot(c, '-o', 'LineWidth', 1.5, 'MarkerSize', 6, 'MarkerEdgeColor', 'b', 'MarkerFaceColor', 'b');
+axis auto;
+title('Plot Graph with Bold Points');
+
+subplot(1,2,2);
+plot(c_norm, '-o', 'LineWidth', 1.5, 'MarkerSize', 6, 'MarkerEdgeColor', 'r', 'MarkerFaceColor', 'r');
+axis auto;
+title('Normalized Plot Graph with Bold Points');
+
+
+
+
+
+
+
+
+

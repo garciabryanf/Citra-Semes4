@@ -1,0 +1,121 @@
+% GARCIA BRYAN FARREL
+% 2327250026
+
+I = imread('cameraman.tif');
+I2 = imread('cropped_building.png.bmp');
+imtool(I);
+imshow(I2);
+
+% GARCIA BRYAN FARREL
+% 2327250026
+
+x1 = 186; x2 = 211; y1 = 105; y2 = 159; 
+xmin = x1; ymin = y1; width = x2-x1; height = y2-y1; 
+I3 = imcrop(I, [xmin ymin width height]); 
+imshow(I3)
+
+% GARCIA BRYAN FARREL
+% 2327250026
+I_big1 = imresize (I,3); 
+imtool(I_big1);
+figure, imshow(I), title('Original Image'); 
+figure, imshow(I_big1), ...
+    title('Enlarged Image w/ bicubic interpolation');
+
+% GARCIA BRYAN FARREL
+% 2327250026
+I_big2 = imresize (I, 3, 'nearest'); 
+I_big3 = imresize (I, 3, 'bilinear'); 
+figure, imshow(I_big2), ... 
+    title('Resized w/ nearest-neighbor interpolation'); 
+figure, imshow(I_big3), ... 
+    title('Resized w/ bilinear interpolation');
+
+figure;
+subplot(1,2,1);
+imshow(I_big2);
+title('Nearest-neighbor interpolation');
+
+subplot(1,2,2);
+imshow(I_big3);
+title('Bilinear interpolation');
+
+% GARCIA BRYAN FARREL
+% 2327250026
+
+I_rows = size(I,1); 
+I_cols = size(I,2); 
+I_sm1 = I(1:2: I_rows, 1:2: I_cols); 
+figure, imshow(I_sm1);
+
+% GARCIA BRYAN FARREL
+% 2327250026
+
+I = imread('cameraman.tif');
+
+I_manual = I(1:2:end, 1:2:end);
+I_resize = imresize(I, 0.5);
+
+figure;
+subplot(1,3,1);
+imshow(I);
+title('Original Image');
+
+subplot(1,3,2);
+imshow(I_manual);
+title('Manual Downsampling');
+
+subplot(1,3,3);
+imshow(I_resize);
+title('imresize w/ anti-aliasing');
+
+% GARCIA BRYAN FARREL
+% 2327250026
+
+I_sm2 = imresize (I,0.5, 'nearest'); 
+I_sm3 = imresize (I,0.5, 'bilinear'); 
+I_sm4 = imresize (I,0.5, 'bicubic'); 
+figure, subplot(1,3,1), imshow(I_sm2), ... 
+    title('Nearest-neighbor Interpolation'); 
+subplot(1,3,2), imshow(I_sm3), title('Bilinear Interpolation'); 
+subplot(1,3,3), imshow(I_sm4), title('Bicubic Interpolation');
+
+% GARCIA BRYAN FARREL
+% 2327250026
+I = imread('cameraman.tif'); 
+J = flipud (I); 
+K = fliplr(I); 
+subplot(1,3,1), imshow(I), title('Original image') 
+subplot(1,3,2), imshow(J), title('Flipped upside-down') 
+subplot(1,3,3), imshow(K), title('Flipped left-right')
+
+% GARCIA BRYAN FARREL
+% 2327250026
+I = imread('eight.tif'); 
+I_rot = imrotate (I, 35); 
+imshow(I_rot);
+
+% GARCIA BRYAN FARREL
+% 2327250026
+I = imread('eight.tif'); 
+I_rot = imrotate (I, -35); 
+imshow(I_rot);
+
+% GARCIA BRYAN FARREL
+% 2327250026
+I = imread('eight.tif'); 
+I_rot2 = imrotate (I, 35, 'bilinear'); 
+figure, 
+imshow(I_rot2)
+
+% GARCIA BRYAN FARREL
+% 2327250026
+I = imread('eight.tif'); 
+I_rot1 = imrotate (I, 35); 
+I_rot2 = imrotate (I, 35, 'bilinear'); 
+I_rot3 = imrotate (I, 35, 'bilinear', 'crop'); 
+figure,
+subplot(1,3,1), imshow(I_rot1), title('Non Bilinear');
+subplot(1,3,2), imshow(I_rot2), title('Bilinear');
+subplot(1,3,3), imshow(I_rot3), title('Bilinear Crop');
+

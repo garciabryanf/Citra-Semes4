@@ -1,0 +1,43 @@
+% Garcia Bryan Farrel
+% 2327250026
+
+a = [0 0 0 1 0 0 0];
+f = [1 2 3 4 5];
+
+g = imfilter(a, f, "same", "conv")
+h = imfilter(a, f, 'full', 'corr')
+
+% Garcia Bryan Farrel
+% 2327250026
+
+x = [140 108 94; 89 99 125; 121 134 221] 
+y = [-1 0 1; -2 0 2; -1 0 1]
+z = imfilter(x,y, 'corr')
+
+% Garcia Bryan Farrel
+% 2327250026
+
+x = [140 108 94; 89 99 125; 121 134 221];
+y = [-1 0 1; -2 0 2; -1 0 1];
+
+z_same = imfilter(x, y, 'corr');
+
+disp('Nilai tengah (same):');
+disp(z_same(2, 2));
+
+% Garcia Bryan Farrel
+% 2327250026
+
+x = [140 108 94; 89 99 125; 121 134 221];
+y = [-1 0 1; -2 0 2; -1 0 1];
+
+z_same = imfilter(x, y, 'corr');
+
+z2 = imfilter(x,y,"conv")
+disp('Hasil konvolusi:');
+disp(z2);
+disp('Nilai tengah:');
+disp(z2(2, 2));
+
+
+

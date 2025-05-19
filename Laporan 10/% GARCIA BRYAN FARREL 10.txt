@@ -1,0 +1,61 @@
+% Garcia Bryan Farrel
+% 2327250026
+
+I = imread('cameraman.tif'); 
+fn = fspecial('average');
+I_new = imfilter (I,fn); 
+
+figure, 
+subplot(1,2,1), imshow(I), title('Original Image');
+subplot(1,2,2), imshow(I_new), title('Filtered Image');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+fn2 = [1 2 1; 2 4 2; 1 2 1];
+fn2 = fn2 * (1/16);
+
+I_new2 = imfilter(I,fn2); 
+figure, subplot(1,2,1), imshow(I_new), title('Uniform Average'); 
+subplot(1,2,2), imshow(I_new2), title('Non-uniform Average');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+fn_gau = fspecial('gaussian',9,1.5); 
+figure, bar3 (fn_gau, 'b'), ... 
+    title('Gaussian filter as a 3D graph');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I_new3 = imfilter (I,fn_gau); 
+figure 
+subplot(1,3,1), imshow(I), title('Original Image'); 
+subplot(1,3,2), imshow(I_new), title('Average Filter'); 
+subplot(1,3,3), imshow(I_new3), title('Gaussian Filter');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I = imread('cameraman.tif'); 
+
+fn_gau1 = fspecial('gaussian', 5, 0.5);   
+fn_gau2 = fspecial('gaussian', 9, 1.5);   
+fn_gau3 = fspecial('gaussian', 15, 3);    
+
+I_gau1 = imfilter(I, fn_gau1); 
+I_gau2 = imfilter(I, fn_gau2); 
+I_gau3 = imfilter(I, fn_gau3); 
+
+figure, 
+subplot(1,3,1), bar3(fn_gau1, 'b'), title('Sigma 0.5');
+subplot(1,3,2), bar3(fn_gau2, 'b'), title('Sigma 1.5');
+subplot(1,3,3), bar3(fn_gau3, 'b'), title('Sigma 3');
+
+figure, 
+subplot(1,4,1), imshow(I), title('Original Image');
+subplot(1,4,2), imshow(I_gau1), title('Sigma 0.5');
+subplot(1,4,3), imshow(I_gau2), title('Sigma 1.5');
+subplot(1,4,4), imshow(I_gau3), title('Sigma 3');
+

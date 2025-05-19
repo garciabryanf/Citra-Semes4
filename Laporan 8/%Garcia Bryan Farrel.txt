@@ -1,0 +1,106 @@
+%Garcia Bryan Farrel
+%2327250026
+
+J = imread('pout.tif'); 
+I = im2double(J); 
+const = 0.5; 
+I2 = I + const; 
+clear J 
+figure, subplot(3,2,1), imshow(I), title('Original Image') 
+subplot(3,2,2), imhist (I), axis tight, ... 
+    title('Original Histogram')
+
+subplot(3,2,3), imshow(I2), title('Original Image + 0.1') 
+subplot(3,2,4), imhist (I2), axis tight, ...
+    title('Original Hist + 0.1')
+
+%Garcia Bryan Farrel
+%2327250026
+
+const = 0.5; 
+I3 = I + const; 
+bad_values = find (I3 > 1); 
+I3 (bad_values) = 1; 
+subplot(3,2,5), imshow(I3), title('Original Image + 0.5') 
+subplot(3,2,6), imhist (I3), axis tight, ... 
+    title('Original Hist + 0.5')
+
+% Garcia Bryan Farrel
+% 2327250026
+
+J = imread('pout.tif'); 
+I = im2double(J); 
+
+const = 0.5; 
+I3 = I + const; 
+bad_values = find(I3 > 1); 
+I3(bad_values) = 1; 
+
+low_in = 0; 
+high_in = 1; 
+low_out = 0; 
+high_out = 1; 
+gamma = 1; 
+
+J = imadjust(I, [low_in; high_in], [low_out; high_out], gamma);
+
+figure;
+subplot(3,2,1), imshow(I), title('Original Image') 
+subplot(3,2,2), imhist(I), axis tight, title('Original Histogram')
+
+subplot(3,2,3), imshow(I3), title('Original Image + 0.5') 
+subplot(3,2,4), imhist(I3), axis tight, title('Original Hist + 0.5')
+
+subplot(3,2,5), imshow(J), title('Image After imadjust') 
+subplot(3,2,6), imhist(J), axis tight, title('Histogram After imadjust')
+
+
+% Garcia Bryan Farrel
+% 2327250026
+
+img_limits = stretchlim(I); 
+I_stretch = imadjust(I, img_limits, []); 
+figure 
+subplot(3,2,1), imshow(I), title('Original Image') 
+subplot(3,2,2), imhist (I), axis tight, ... 
+    title('Original Histogram') 
+subplot(3,2,3), imshow(I_stretch), ...
+    title('Stretched Image') 
+subplot(3,2,4), imhist (I_stretch), axis tight, ...
+    title('Stretched Histogram') 
+
+% Garcia Bryan Farrel
+% 2327250026
+
+X = reshape (I, 1, prod(size(I))); 
+Y = reshape (I_shrink, 1, prod (size (I_shrink))); 
+figure, plot(X,Y,'.') 
+xlim([0 255]); ylim([0 255]); 
+xlabel('Original Image'); 
+ylabel('Adjusted Image');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I_shrink = imadjust(I, stretchlim (I), [0.25 0.75],2); 
+X = reshape (I,1,prod(size(I))); 
+Y = reshape (I_shrink, 1, prod(size (I_shrink))); 
+figure 
+subplot(2,2,1), imshow(I), title('Original Image') 
+subplot(2,2,2), imhist (I), axis tight, ... 
+title('Original Histogram') 
+subplot(2,2,3), imshow(I_shrink), title('Adjusted Image') 
+subplot(2,2,4), imhist (I_shrink), axis tight, ...
+    title('Adjusted Histogram') 
+figure, plot(X,Y,'.'), xlim([0 255]), ylim([0 255])
+
+
+
+
+
+
+
+
+
+
+
