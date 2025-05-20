@@ -1,0 +1,106 @@
+% GARCIA BRYAN FARREL
+% 2327250026
+
+I1 = imread('cameraman.tif'); 
+sx = 2; sy = 2; 
+T = maketform('affine', [sx 0 0; 0 sy 0; 0 0 1]'); 
+I2 = imtransform(I1,T); 
+imshow(I2), title('Using affine transformation') 
+I3 = imresize(I1, 2); 
+figure, imshow(I3), title('Using image resizing')
+
+subplot(1, 2, 1);imshow(I2); title('Using affine transformation');
+subplot(1, 2, 2);imshow(I3); title('Using image resizing');
+
+% GARCIA BRYAN FARREL
+% 2327250026
+
+I1 = imread('cameraman.tif'); 
+theta = 35*pi/180
+xform = [cos(theta) sin(theta) 0; -sin(theta) cos(theta) 0; 0 0 1]' 
+T = maketform('affine', xform); 
+I4 = imtransform(I1, T); 
+imshow(I4), title('Using affine transformation') 
+I5 = imrotate (I1, 35); 
+figure, imshow(I5), title('Using image rotating')
+
+subplot(1, 2, 1);imshow(I4); title('Using affine transformation');
+subplot(1, 2, 2);imshow(I5); title('Using image resizing');
+
+% GARCIA BRYAN FARREL
+% 2327250026
+
+I1 = imread('cameraman.tif'); 
+delta_x = 50; 
+delta_y = 100; 
+xform = [1 0 delta_x; 0 1 delta_y; 0 0 1]' 
+tform_translate = maketform('affine', xform); 
+I6 = imtransform(I1, tform_translate, ...
+    'XData', [1 (size (I1,2)+xform(3,1))], ... 
+    'YData', [1 (size (I1,1)+xform(3,2))],  ... 
+    'FillValues', 128); 
+figure, imshow(I6);
+
+subplot(1, 2, 1); imshow(I1); title('Original');
+subplot(1, 2, 2); imshow(I6); title('Maketform dan imtransform');
+
+% GARCIA BRYAN FARREL
+% 2327250026
+
+I = imread('cameraman.tif'); 
+sh_x = 2; sh_y = 1.5; 
+xform = [1 sh_y 0; sh_x 1 0; 0 0 1]' 
+T = maketform('affine', xform); 
+I7 = imtransform(I1, T); 
+imshow(I7)
+
+% Garcia Bryan Farrel
+% 2327250026
+
+base = imread('autumn.tif');
+unregistered = imread("autumn.tif");
+cpselect(unregistered, base);
+base_point;
+input_point;
+
+input_point_adj = cpcorr(input_point, base_point, ...
+    unregistered(:,:,1),base(:,:,1));
+
+subplot(1,2,1); imshow(base)
+subplot(1,2,2); imshow(unregistered)
+
+% Garcia Bryan Farrel
+% 2327250026
+
+% Select the type of transformation 
+mytform1 = cp2tform(input_points, base_points, ...
+    'nonreflective similarity'); 
+% Transform the unregistered image 
+info = imfinfo('autumn.tif'); 
+registered = imtransform(unregistered, mytform1, ...
+    'XData', [1 info.Width], 'YData', [1 info. Height]);
+
+figure, imshow(registered); 
+hold on 
+h = imshow(base); 
+set (h, 'AlphaData', 0.6)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
