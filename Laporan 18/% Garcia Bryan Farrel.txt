@@ -1,0 +1,214 @@
+% Garcia Bryan Farrel
+% 2327250026
+
+I = imread('lena_gray.bmp');
+[I_prw1,t1] = edge (I, 'prewitt'); 
+I_noise = imnoise (I, 'gaussian'); 
+[I_prw2,t2] = edge (I_noise, 'prewitt'); 
+figure, 
+subplot(2,2,1), imshow(I), title('Original Image');
+subplot(2,2,2), imshow(I_prw1), title('Prewitt, default thresh');
+subplot(2,2,3), imshow(I_noise), title('Image w/ noise'); 
+subplot(2,2,4), imshow(I_prw2), title('Prewitt on noise');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+[I_sobl,t1] = edge (I, 'sobel'); 
+[I_sob2,t2] = edge (I_noise, 'sobel'); 
+figure,
+subplot(2,2,1), imshow(I), title('Original Image'); 
+subplot(2,2,2), imshow(I_sobl), title('Sobel, default thresh');
+subplot(2,2,3), imshow(I_noise), title('Image w/ noise'); 
+subplot(2,2,4), imshow(I_sob2), title('Sobel on noise');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I_sob3 = edge (I, 'sobel', 'nothinning'); 
+figure, subplot(1,2,1), imshow(I_sobl), title('Thinning'); 
+subplot(1,2,2), imshow(I_sob3), title('No Thinning');
+
+
+% Garcia Bryan Farrel
+% 2327250026
+
+[I_sob4, t, I_sobv, I_sobh] = edge(I, 'sobel');
+figure
+subplot(2,2,1), imshow(I), title('Original Image');
+subplot(2,2,2), imshow(I_sob4), title('Complete Sobel');
+subplot(2,2,3), imshow(abs(I_sobv),[]), title('Sobel Vertical');
+subplot(2,2,4), imshow(abs(I_sobh),[]), title('Sobel Horizontal');
+
+min_v = min(I_sobv(:));
+max_v = max(I_sobv(:));
+min_h = min(I_sobh(:));
+max_h = max(I_sobh(:));
+
+disp(['Min Vertical: ', num2str(min_v)]);
+disp(['Max Vertical: ', num2str(max_v)]);
+disp(['Min Horizontal: ', num2str(min_h)]);
+disp(['Max Horizontal: ', num2str(max_h)]);
+
+% Garcia Bryan Farrel
+% 2327250026
+
+[I_sob4, t, I_sobv, I_sobh] = edge(I, 'sobel');
+G = sqrt(I_sobv.^2 + I_sobh.^2);% untuk hitung magnitude gradien arah horiz dan verti
+
+BW = G >= t;
+
+figure
+subplot(2,2,1), imshow(I), title('Original Image');
+subplot(2,2,2), imshow(BW), title('Thresholded Sobel');
+subplot(2,2,3), imshow(abs(I_sobv), []), title('Sobel Vertical (abs)');
+subplot(2,2,4), imshow(abs(I_sobh), []), title('Sobel Horizontal (abs)');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I_robl = edge (I, 'roberts'); 
+[I_rob2,t] = edge (I_noise, 'roberts'); 
+
+figure ,
+subplot(2,2,1), imshow(I), title('Original Image'); 
+subplot(2,2,2), imshow(I_robl), title('Roberts, default thresh');
+subplot(2,2,3), imshow(I_noise), title('Image w/ noise'); 
+subplot(2,2,4), imshow(I_rob2), title('Roberts on noise');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I_denoised = imgaussfilt(I_noise, 1);  
+I_edge = edge(I_denoised, 'sobel');   
+I_denoised = medfilt2(I_noise, [3 3]);
+figure,
+imshow(I_denoised), title('Reduce Noise');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I_log1 = edge (I, 'log'); 
+[I_log2,t] = edge (I_noise, 'log'); 
+figure 
+subplot(2,2,1), imshow(I), title('Original Image'); 
+subplot(2,2,2), imshow(I_log1), title('LoG, default parameters');
+subplot(2,2,3), imshow(I_noise), title('Image w/ noise'); 
+subplot(2,2,4), imshow(I_log2), title('LoG on noise');
+
+% Garcia Bryan Farrel
+% 2327250026
+I_log3 = edge(I, 'log', [], 4); % σ = 4
+imshow(I_log3), title('LoG with sigma = 4');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I_can1 = edge (I, 'canny'); 
+[I_can2,t] = edge (I_noise, 'canny', [], 2.5); 
+figure 
+subplot(2,2,1), imshow(I), title('Original Image'); 
+subplot(2,2,2), imshow(I_log1), title('Canny, default parameters');
+subplot(2,2,3), imshow(I_noise), title('Image w/ noise'); 
+subplot(2,2,4), imshow(I_can2), title('Canny on noise');
+
+% Garcia Bryan Farrel
+% 2327250026
+[I_can3,t] = edge (I_noise, 'canny', [], 2); 
+figure 
+subplot(1,2,1), imshow(I_can2), title('Canny, default parameters'); 
+subplot(1,2,2), imshow(I_can3), title('Canny, sigma = 2');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I = imread('mandrill.tif'); 
+[I_can1, thresh] = edge (I, 'canny'); 
+[I_can2, thresh] = edge (I, 'canny', 0.4); 
+[I_can3, thresh] = edge (I, 'canny', 0.08); 
+
+figure 
+subplot(2,2,1), imshow(I), title('Original Image');
+subplot(2,2,2), imshow(I_can1), title('Canny, default parameters');
+subplot(2,2,3), imshow(I_can2), title('Canny, thresh = 0.4');
+subplot(2,2,4), imshow(I_can3), title('Canny, thresh = 0.08');
+
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I = imread('mandrill.tif'); 
+I = im2double(I);
+
+k = zeros(3,3,8); 
+k(:,:,1) = [-3 -3 5; -3 0 5; -3 -3 5]; 
+k(:,:,2) = [-3 5 5; 3 0 5; -3 -3 -3]; 
+k(:,:,3) = [5 5 5; -3 0 -3; -3 -3 -3]; 
+k(:,:,4) = [5 5 -3; 5 0 -3; -3 -3 -3]; 
+k(:,:,5) = [5 -3 -3; 5 0 -3; 5 -3 -3]; 
+k(:,:,6) = [-3 -3 -3; 5 0 -3; 5 5 -3]; 
+k(:,:,7) = [-3 -3 -3; -3 0 -3; 5 5 5]; 
+k(:,:,8) = [-3 -3 -3; -3 0 5; -3 5 5];
+
+I_k = zeros(size(I,1), size(I,2), 8); 
+for i = 1:8 
+    I_k(:,:,i) = imfilter(I, k(:,:,i)); 
+end
+
+figure 
+for j = 1:8 
+subplot(2,4,j), imshow(abs(I_k(:,:,j)), []), ... 
+    title(['Kirsch mask' num2str(j)]); 
+end
+
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I_kir = max(I_k, [],3); 
+figure, imshow(I_kir,[]);
+
+% Garcia Bryan Farrel
+% 2327250026
+I_noise = imnoise(I, 'gaussian'); 
+I_k_noise = zeros(size(I,1), size(I,2), 8);
+
+for i = 1:8
+    I_k_noise(:,:,i) = imfilter(I_noise, k(:,:,i));  
+end
+
+I_kir_noise = max(I_k_noise, [], 3); 
+figure,
+subplot(1,2,1), imshow(I_noise), title('Noisy Image');
+subplot(1,2,2), imshow(I_kir_noise, []), title('Kirsch Noisy Image');
+
+% Garcia Bryan Farrel
+% 2327250026
+r = zeros(3,3,8); 
+r(:,:,1) = [-1 0 1;2 0 2; -1 0 1]; 
+r(:,:,2) = [0 1 2; 1 0 1; -2 -1 0]; 
+r(:,:,3) = [1 2 1; 0 0 0; -1 -2 -1]; 
+r(:,:,4) = [2 1 0; 1 0 -1; 0 -1 -2]; 
+r(:,:,5) = [1 0 -1; 2 0 2; 1 0 -1]; 
+r(:,:,6) = [0 -1 2; 1 0 1; 2 1 0]; 
+r(:,:,7) = [-1 -2 -1;0 0 0; 1 2 1]; 
+r(:,:,8) = [-2 -1 0; -1 0 1;0 1 2];
+
+I_r = zeros(size (I,1), size (I,2), 8); 
+for i = 1:8 
+    I_r(:,:,i) = imfilter(I,r(:,:,i)); 
+end 
+figure 
+for j = 1:8 
+    subplot(2,4,j), imshow(abs(I_r(:,:,j)),[]), ... 
+        title(['Robinson mask', num2str(j)]); 
+end
+% Garcia Bryan Farrel
+% 2327250026
+I_rob = max(I_r, [],3); 
+figure, imshow(I_kir, []);
+
+
+
+
+

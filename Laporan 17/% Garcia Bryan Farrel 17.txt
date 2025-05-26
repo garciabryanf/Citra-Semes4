@@ -1,0 +1,80 @@
+% Garcia Bryan Farrel
+% 2327250026
+
+I = imread('morph.bmp');
+
+se = strel('square', 3); 
+I_ero = imerode (I,se); 
+
+I_bou = imsubtract(I, I_ero); 
+
+I_perim = bwperim (I,4); 
+
+subplot(1,3,1),imshow(I), title('Original image');
+subplot(1,3,2),imshow(I_bou), title('Boundary Extraction');
+subplot(1,3,3),imshow(I_perim), title('Boundary using bwperim');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I_fill1 = imfill(I, 'holes'); 
+figure, 
+imshow(I_fill1), title('Holes filled');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I_fill2 = imfill (I); 
+imshow(I_fill2), title('Interactive fill');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I_label = bwlabel (I); 
+figure, 
+imshow(I_label, []), title('Labeled image');
+
+% Garcia Bryan Farrel
+% 2327250026
+I_thin = bwmorph (I, 'thin', 5); 
+figure, imshow(I_thin), title('Thinning, 5 iterations');
+I_label = bwlabel(I);
+RGB_label = label2rgb(I_label);
+imshow(RGB_label), title('Labeled Image with Colors');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I_thin = bwmorph (I, 'thin', 5); 
+I_thin2 = bwmorph (I, 'thin', 10); 
+I_thin3 = bwmorph (I, 'thin', 15); 
+I_thin4 = bwmorph (I, 'thin', inf); 
+figure,
+subplot(1,4,1), imshow(I_thin), title('Thinning 5 Iterations');
+subplot(1,4,2), imshow(I_thin2), title('Thinning 10 Iterations');
+subplot(1,4,3), imshow(I_thin3), title('Thinning 15 Iterations');
+subplot(1,4,4), imshow(I_thin4), title('Thinning infinite Iterations');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I_thick = bwmorph (I, 'thicken', 5); 
+figure, imshow(I_thick), title('Thicken 5 iterations');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I_skel = bwmorph (I, 'skel', Inf); 
+figure, 
+imshow(I_skel), title('Skeleton of image');
+
+% Garcia Bryan Farrel
+% 2327250026
+
+I_skel = bwmorph (I, 'skel', Inf); 
+figure, 
+imshow(I_skel), title('Skeleton of image');
+
+
+
+

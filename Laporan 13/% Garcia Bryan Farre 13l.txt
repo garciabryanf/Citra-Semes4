@@ -1,0 +1,102 @@
+% Garcia Bryan Farrel
+% 2327250026
+
+I = imread('eight.tif'); 
+Id = im2double(I); 
+I_dft = fft2(Id); 
+[M, N] = size(I); 
+dist = distmatrix(M, N); 
+
+figure
+subplot(2,2,1); imshow(Id), title('Gambar Asli')
+subplot(2,2,2);imshow(log(1 + abs(fftshift(I_dft))), []), ...
+    title('Fourier Transform (fftshift)')
+subplot(2,2,3);mesh(dist), title('Distance Matrix (tanpa fftshift)')
+subplot(2,2,4);mesh(fftshift(dist)), ...
+    title('Distance Matrix (dengan fftshift)')
+
+disp(size(I));
+disp(size(dist));
+
+
+% Garcia Bryan Farrel
+% 2327250026
+
+H = zeros(M,N);
+
+radius = 35;
+ind = dist <= radius;
+H(ind) = 1;
+Hd = double(H);
+
+DFT_filt = Hd .* I_dft; 
+I2 = real (ifft2 (DFT_filt))
+
+figure, imshow(log(1 + abs (fftshift (DFT_filt))), []), 
+title('Filtered FT'); 
+figure, imshow(I2), title('Filtered Image'); 
+
+% Garcia Bryan Farrel
+% 2327250026
+
+sigma = 30; 
+H_gau = exp(-(dist .^2)/ (2 *(sigma ^ 2))); 
+figure, 
+subplot(2,2,1);imshow(Id),title('Original Image')
+
+subplot(2,2,2);imshow(log(1 + abs(fftshift(I_dft))), []),...
+    title('DFT of original image')
+
+subplot(2,2,3);mesh(fftshift(dist)), title('Distance Matrix')
+subplot(2,2,4);imshow(fftshift(H_gau), []),...
+    title('Gaussian low-pass filter')
+
+% Garcia Bryan Farrel
+% 2327250026
+
+DFT_filt_gau = H_gau .* I_dft; 
+I3 = real (ifft2 (DFT_filt_gau)); 
+figure, imshow(log(1 + abs (fftshift (DFT_filt_gau))),[]), ... 
+title('Filtered FT'); 
+figure, imshow(I3), title('Filtered Image');
+
+
+% Garcia Bryan Farrel
+% 2327250026
+
+DO = 35; n = 3; 
+H_but = 1./ (1 + (dist / DO) .^(2 * n)); 
+figure, imshow(Id), title('Original Image'); 
+figure, imshow(log(1 + abs (fftshift (I_dft))),[]), ... 
+title('FT of original image'); 
+figure, mesh(fftshift(dist)), title('Distance Matrix'); 
+figure, imshow(fftshift (H_but)), title('Butterworth low-pass');
+
+
+% Garcia Bryan Farrel
+% 2327250026
+
+figure, mesh (fftshift (Hd)), title('Ideal low-pass filter'); 
+figure, mesh (fftshift (H_gau)), title('Gaussian low-pass filter'); 
+figure, mesh (fftshift (H_but)), title('Butterworth low-pass filter');
+
+
+% Garcia Bryan Farrel
+% 2327250026
+
+DO = 35; n_high = 20;  
+H_high = 1 ./ (1 + (dist / DO).^(2 * n_high));
+DFT_high = H_high .* I_dft;
+I_high = real(ifft2(DFT_high));
+
+figure
+subplot(1,2,1); imshow(I2, []),...
+    title('Ideal Filtered Image')
+
+subplot(1,2,2); imshow(I_high, []),...
+    title('Butterworth Order 20 Filtered Image')
+
+
+
+
+ 
